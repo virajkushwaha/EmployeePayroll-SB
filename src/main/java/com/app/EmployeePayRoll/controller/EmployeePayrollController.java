@@ -1,5 +1,6 @@
 package com.app.EmployeePayRoll.controller;
 
+import com.app.EmployeePayRoll.dto.EmployeeDTO;
 import com.app.EmployeePayRoll.model.Employee;
 import com.app.EmployeePayRoll.services.EmployeePayrollServices;
 import jakarta.validation.Valid;
@@ -40,22 +41,16 @@ public class EmployeePayrollController {
 
 
     @PostMapping
-    public Employee saveEmployee(@RequestBody Employee emp){
+    public Employee saveEmployee(@RequestBody EmployeeDTO emp){
         logger.info("Received Request Body: {}", emp);
-        Employee saveEmployee = employeeServices.saveEmployee(emp);
-        logger.info("Successfully saved employee with ID: {}", saveEmployee.getId());
-        return saveEmployee ;
+        return employeeServices.saveEmployee(emp);
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateEmployee(@PathVariable Long id, @Valid @RequestBody Employee employee){
-        try {
-            Employee updatedEmployee = employeeServices.updateEmployee(id, employee);
-            return ResponseEntity.ok(updatedEmployee);
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+    public Employee updateEmployee(@PathVariable Long id,@RequestBody EmployeeDTO employee){
+
+        return employeeServices.updateEmployee(id, employee);
     }
 
     @DeleteMapping("/delete/{id}")

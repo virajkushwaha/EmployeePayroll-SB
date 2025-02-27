@@ -1,5 +1,6 @@
 package com.app.EmployeePayRoll.services;
 
+import com.app.EmployeePayRoll.dto.EmployeeDTO;
 import com.app.EmployeePayRoll.model.Employee;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -27,19 +28,21 @@ public class EmployeePayrollServices {
         return employeeRepository.findById(id);
     }
 
-    public Employee saveEmployee(Employee emp){
+    public Employee saveEmployee(EmployeeDTO emp){
         logger.info("Received Employee Data Before Saving: {}", emp);
-
-        Employee savedEmployee = employeeRepository.save(emp);
-
+        Employee savedEmployee = new Employee();
+        savedEmployee.setName(emp.getName());
+        savedEmployee.setSalary(emp.getSalary());
+        savedEmployee.setDepartment(emp.getDepartment());
         logger.info("Saved Employee Data: {}", savedEmployee);
-        return savedEmployee;
+
+        return employeeRepository.save(savedEmployee);
     }
 
 
 
     // Method to update employee
-    public Employee updateEmployee(Long id, Employee employee){
+    public Employee updateEmployee(Long id, EmployeeDTO employee){
         logger.info("Updating employee with ID: {} with details: {}", id, employee);
 
         Employee existingEmployee = employeeRepository.findById(id)

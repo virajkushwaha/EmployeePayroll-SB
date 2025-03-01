@@ -1,24 +1,37 @@
 package com.app.EmployeePayRoll.dto;
 
-import com.app.EmployeePayRoll.model.Employee;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.websocket.server.ServerEndpoint;
-import lombok.*;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
 @Data
-@Setter
-public  class EmployeeDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class EmployeeDTO {
 
-    @NotBlank(message = "Name Cannot be empty")
+    @NotBlank(message = "Name cannot be empty")
     @Pattern(regexp = "^[A-Z][a-zA-Z\\s]{2,}$", message = "Name must start with a capital letter and be at least 3 characters long")
-    private String name ;
+    private String name;
 
-    private String department ;
+    @NotNull(message = "Salary cannot be null")
+    @Min(value = 3000, message = "Minimum salary should be 3000")
     private double salary;
 
+    @NotBlank(message = "Gender is required")
+    @Pattern(regexp = "^(Male|Female|Other)$", message = "Gender must be Male, Female, or Other")
+    private String gender;
+
+    @NotNull(message = "Start date is required")
+    private String startDate;
+
+    private String note;
+
+    @NotBlank(message = "Profile picture URL cannot be empty")
+    private String profilePic;
+
+    @NotBlank(message = "At least one department must be selected")
+    private String department;
 }

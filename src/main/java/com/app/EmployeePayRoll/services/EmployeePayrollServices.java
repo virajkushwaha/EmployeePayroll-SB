@@ -30,10 +30,15 @@ public class EmployeePayrollServices {
 
     public Employee saveEmployee(EmployeeDTO emp){
         logger.info("Received Employee Data Before Saving: {}", emp);
-        Employee savedEmployee = new Employee();
-        savedEmployee.setName(emp.getName());
-        savedEmployee.setSalary(emp.getSalary());
-        savedEmployee.setDepartment(emp.getDepartment());
+        Employee savedEmployee = new Employee(
+                emp.getName(),
+                emp.getSalary(),
+                emp.getGender(),
+                emp.getStartDate(),
+                emp.getNote(),
+                emp.getProfilePic(),
+                emp.getDepartment()
+        );
         logger.info("Saved Employee Data: {}", savedEmployee);
 
         return employeeRepository.save(savedEmployee);

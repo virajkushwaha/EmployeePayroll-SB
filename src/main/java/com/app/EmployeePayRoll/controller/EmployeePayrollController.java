@@ -4,6 +4,7 @@ import com.app.EmployeePayRoll.dto.EmployeeDTO;
 import com.app.EmployeePayRoll.model.Employee;
 import com.app.EmployeePayRoll.services.EmployeePayrollServices;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/emp")
 public class EmployeePayrollController {
@@ -48,9 +49,15 @@ public class EmployeePayrollController {
 
 
     @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable Long id,@Valid @RequestBody EmployeeDTO employee){
+    public ResponseEntity<String> updateEmployee(@PathVariable Long id,@Valid @RequestBody EmployeeDTO employee){
+        try {
+            employeeServices.updateEmployee(id, employee);
+            return ResponseEntity.ok("Employee with ID " + id + " updated successfully.");
+        } catch (NoSuchElementException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
 
-        return employeeServices.updateEmployee(id, employee);
+
     }
 
     @DeleteMapping("/delete/{id}")

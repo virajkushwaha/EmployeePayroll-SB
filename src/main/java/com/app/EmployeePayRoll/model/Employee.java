@@ -3,6 +3,7 @@ package com.app.EmployeePayRoll.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -18,12 +19,14 @@ public class Employee {
     private String name;
     private double salary;
     private String gender;
-    private String startDate;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
     private String note;
     private String profilePic;
     private String department;
 
-    public Employee(String name, double salary, String gender, String startDate, String note, String profilePic, String department) {
+    public Employee(String name, double salary, String gender, LocalDate startDate, String note, String profilePic, String department) {
         this.name = name;
         this.salary = salary;
         this.gender = gender;

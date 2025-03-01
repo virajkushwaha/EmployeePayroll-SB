@@ -1,10 +1,12 @@
 package com.app.EmployeePayRoll.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -25,7 +27,9 @@ public class EmployeeDTO {
     private String gender;
 
     @NotNull(message = "Start date is required")
-    private String startDate;
+    @JsonFormat(pattern = "dd MMM yyyy")
+    @PastOrPresent(message = "Start date must be a past or present date")
+    private LocalDate startDate;
 
     private String note;
 

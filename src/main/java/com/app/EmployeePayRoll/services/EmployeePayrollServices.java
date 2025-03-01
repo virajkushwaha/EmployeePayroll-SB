@@ -2,6 +2,7 @@ package com.app.EmployeePayRoll.services;
 
 import com.app.EmployeePayRoll.dto.EmployeeDTO;
 import com.app.EmployeePayRoll.model.Employee;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-
+@Slf4j
 @Service
 public class EmployeePayrollServices {
     private static final Logger logger = (Logger) LoggerFactory.getLogger(EmployeePayrollServices.class);
@@ -59,6 +60,10 @@ public class EmployeePayrollServices {
         existingEmployee.setName(employee.getName());
         existingEmployee.setDepartment(employee.getDepartment());
         existingEmployee.setSalary(employee.getSalary());
+        existingEmployee.setGender(employee.getGender());
+        existingEmployee.setProfilePic(employee.getProfilePic());
+        existingEmployee.setStartDate(employee.getStartDate());
+        existingEmployee.setNote(employee.getNote());
 
         Employee updatedEmployee = employeeRepository.save(existingEmployee);
 

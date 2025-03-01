@@ -41,14 +41,14 @@ public class EmployeePayrollController {
 
 
     @PostMapping
-    public Employee saveEmployee(@RequestBody EmployeeDTO emp){
+    public Employee saveEmployee(@Valid @RequestBody EmployeeDTO emp){
         logger.info("Received Request Body: {}", emp);
         return employeeServices.saveEmployee(emp);
     }
 
 
     @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable Long id,@RequestBody EmployeeDTO employee){
+    public Employee updateEmployee(@PathVariable Long id,@Valid @RequestBody EmployeeDTO employee){
 
         return employeeServices.updateEmployee(id, employee);
     }

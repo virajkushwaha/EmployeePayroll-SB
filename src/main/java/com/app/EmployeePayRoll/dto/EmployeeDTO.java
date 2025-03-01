@@ -1,19 +1,19 @@
 package com.app.EmployeePayRoll.dto;
 
 import com.app.EmployeePayRoll.model.Employee;
+import jakarta.websocket.server.ServerEndpoint;
+import lombok.*;
 
-public class EmployeeDTO {
-    public String name ;
-    public String department ;
-    public double salary;
 
-    public EmployeeDTO(){}
-
-    public EmployeeDTO(String name, String department, double salary) {
-        this.name = name;
-        this.department = department;
-        this.salary = salary;
-    }
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Data
+@Setter
+public  class EmployeeDTO {
+    private String name ;
+    private String department ;
+    private double salary;
 
     public String getName() {
         return name;
@@ -38,5 +38,4 @@ public class EmployeeDTO {
     public void setSalary(double salary) {
         this.salary = salary;
     }
-
 }
